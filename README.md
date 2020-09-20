@@ -22,6 +22,9 @@ Running this will create default working directory in
 `/tmp/openvpn-route-github`. It will also download `jq` into this directory
 on first run.
 
+**This script requires `wget` to download `jq` and fetch from Github's
+public API.**
+
 ## Sample output
 ```
 # github web
