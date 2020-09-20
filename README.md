@@ -25,6 +25,19 @@ on first run.
 **This script requires `wget` to download `jq` and fetch from Github's
 public API.**
 
+## Fault tolerance
+
+If the script fails to fetch Github IPs from https://api.github.com/meta within
+1 second, the script will log a message and proceed to use the IPs from the
+last successful fetch.
+
+Client's connection will be delayed for at most 1 second if Github's API is
+slow to respond or if there are network connectivity issues in your server's
+setup.
+
+There is a fallback JSON that is provided in this project which was fetched on
+2020-09-20.
+
 ## Sample output
 ```
 # github web
