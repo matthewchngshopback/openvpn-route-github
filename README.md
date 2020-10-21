@@ -16,7 +16,7 @@ script-security 2
 client-connect <path/to/this/project/build-config.sh>
 ```
 
-# build-config.sh [output]
+# build-config.sh [output [format]] 
 
 Running this will create default working directory in
 `/tmp/openvpn-route-github`. It will also download `jq` into this directory
@@ -38,7 +38,7 @@ setup.
 There is a fallback JSON that is provided in this project which was fetched on
 2020-09-20.
 
-## Sample output
+## Sample server config output
 ```
 # github web
 push "route 192.30.252.0 255.255.252.0"
@@ -104,6 +104,95 @@ push "route 185.199.109.153 255.255.255.255"
 push "route 185.199.110.153 255.255.255.255"
 push "route 185.199.111.153 255.255.255.255"
 
+```
+
+# build-client-config.sh [output]
+This is just a convenience wrapper to run
+`build-config.sh /some/output/file.conf "route %s"` which will generate output
+for use in OpenVPN client configuration.
+
+`build-config.sh` usage is described above.
+
+If `output` isn't specified, it defaults to 
+`/tmp/openvpn-route-github/openvpn-client/out.conf`.
+
+Running this will create a default output directory at
+`/tmp/openvpn-route-github/openvpn-client`.
+
+Please note that Github IP addresses can change over time so the generated
+routes will decay. When routes stop working, simply re-generate the routes,
+update your `ovpn` config, reconnect and get back to work.
+
+## Sample client config output
+```
+####
+# Auto generated at Wed Oct 21 04:08:39 UTC 2020
+# Please append contents into client ovpn and reconnect
+##
+
+# github web
+route 192.30.252.0 255.255.252.0
+route 185.199.108.0 255.255.252.0
+route 140.82.112.0 255.255.240.0
+route 13.114.40.48 255.255.255.255
+route 52.192.72.89 255.255.255.255
+route 52.69.186.44 255.255.255.255
+route 15.164.81.167 255.255.255.255
+route 52.78.231.108 255.255.255.255
+route 13.234.176.102 255.255.255.255
+route 13.234.210.38 255.255.255.255
+route 13.229.188.59 255.255.255.255
+route 13.250.177.223 255.255.255.255
+route 52.74.223.119 255.255.255.255
+route 13.236.229.21 255.255.255.255
+route 13.237.44.5 255.255.255.255
+route 52.64.108.95 255.255.255.255
+route 18.228.52.138 255.255.255.255
+route 18.228.67.229 255.255.255.255
+route 18.231.5.6 255.255.255.255
+# github git
+route 192.30.252.0 255.255.252.0
+route 185.199.108.0 255.255.252.0
+route 140.82.112.0 255.255.240.0
+route 13.114.40.48 255.255.255.255
+route 52.192.72.89 255.255.255.255
+route 52.69.186.44 255.255.255.255
+route 15.164.81.167 255.255.255.255
+route 52.78.231.108 255.255.255.255
+route 13.234.176.102 255.255.255.255
+route 13.234.210.38 255.255.255.255
+route 13.229.188.59 255.255.255.255
+route 13.250.177.223 255.255.255.255
+route 52.74.223.119 255.255.255.255
+route 13.236.229.21 255.255.255.255
+route 13.237.44.5 255.255.255.255
+route 52.64.108.95 255.255.255.255
+route 18.228.52.138 255.255.255.255
+route 18.228.67.229 255.255.255.255
+route 18.231.5.6 255.255.255.255
+route 18.181.13.223 255.255.255.255
+route 54.238.117.237 255.255.255.255
+route 54.168.17.15 255.255.255.255
+route 3.34.26.58 255.255.255.255
+route 13.125.114.27 255.255.255.255
+route 3.7.2.84 255.255.255.255
+route 3.6.106.81 255.255.255.255
+route 18.140.96.234 255.255.255.255
+route 18.141.90.153 255.255.255.255
+route 18.138.202.180 255.255.255.255
+route 52.63.152.235 255.255.255.255
+route 3.105.147.174 255.255.255.255
+route 3.106.158.203 255.255.255.255
+route 54.233.131.104 255.255.255.255
+route 18.231.104.233 255.255.255.255
+route 18.228.167.86 255.255.255.255
+# github pages
+route 192.30.252.153 255.255.255.255
+route 192.30.252.154 255.255.255.255
+route 185.199.108.153 255.255.255.255
+route 185.199.109.153 255.255.255.255
+route 185.199.110.153 255.255.255.255
+route 185.199.111.153 255.255.255.255
 ```
 
 # OpenVPN documentation 

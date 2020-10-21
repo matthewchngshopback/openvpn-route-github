@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 BASEDIR=$(dirname "$0")
 WORKDIR="/tmp/openvpn-route-github"
@@ -12,6 +13,7 @@ ghmetaKeys="web git pages" # Specify keys in https://api.github.com/meta with IP
 
 # 
 output=${1-$WORKDIR/openvpn-server/out.conf}
+routecmdformat=${2-'push "route %s"'}
 
 # Setup directories
 mkdir -p $WORKDIR/bin $WORKDIR/api.github.com $WORKDIR/openvpn-server
@@ -40,7 +42,6 @@ else
 fi
 
 tmpoutfile=$(mktemp $output.tmp.XXXXXX)
-routecmdformat='push "route %s"'
 
 for k in $ghmetaKeys; do
     echo "# github $k" >> $tmpoutfile
